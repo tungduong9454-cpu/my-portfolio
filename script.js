@@ -130,3 +130,18 @@ window.addEventListener('scroll', () => {
         const hiddenElements = document.querySelectorAll('.reveal-item');
         hiddenElements.forEach((el) => observer.observe(el));
     });
+/* --------add nội dung lên email */
+
+    document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    const email = "tungduong9454@gmail.com"; // email của bạn
+
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + "\n\n" + message)}`;
+
+    window.location.href = mailtoLink;
+});
