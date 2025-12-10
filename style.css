@@ -1371,7 +1371,7 @@ html {
     }
     
     /* Ảnh dự án to ra */
-    .portrait-img-project { width: 100%; max-width: 450px; height: auto; display: block; transform: translateX(-50px);  }
+    .portrait-img-project { width: 100%; max-width: 400px; height: auto; display: block;  }
 }
 
 /* --------------------------------------------------------------------------
