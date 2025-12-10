@@ -763,7 +763,7 @@ html {
 .tvc-img-wrapper {
     position: relative;
     /* Tạo một khung viền mờ hoặc bóng đổ phía sau nếu thích */
-    right: -50px; 
+    right: 10px; 
 }
 
 .portrait-img-project {
@@ -796,7 +796,7 @@ html {
     flex-direction: column;
     align-items: flex-start; /* Căn trái toàn bộ */
     position: relative;
-    left: 50px; /* Đẩy sang phải 50px */
+    left: 10px; /* Đẩy sang phải 50px */
 }
 
 /* Tag nhỏ màu vàng/xám */
