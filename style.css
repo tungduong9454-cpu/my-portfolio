@@ -1581,11 +1581,43 @@ html {
 
 
     /* --- D. SECTION PROJECT (Ảnh to + Chữ) --- */
-    .section-vertical-left { padding: 50px 20px; }
-    
-    .tvc-img-wrapper { right: 0; margin-bottom: 30px; }
-    
-    .tvc-text { left: 0; }
+    /* 1. Đánh vào khung ngoài cùng */
+    .section-vertical-left {
+        display: block !important;
+        padding: 40px 20px !important;
+        height: auto !important;
+    }
+
+    /* 2. QUAN TRỌNG NHẤT: Đánh vào thẻ bao trung gian (ví dụ: .row, .container, .flex-box...) */
+    /* Dấu > * nghĩa là tác động lên mọi thẻ con trực tiếp của section */
+    .section-vertical-left > * {
+        display: block !important; /* Hủy flex ngang */
+        width: 100% !important;
+        position: static !important;
+        margin: 0 !important;
+    }
+
+    /* 3. Xử lý cụ thể 2 đối tượng chính */
+    .tvc-img-wrapper, 
+    .tvc-text {
+        display: block !important; /* Ép hiển thị dạng khối (tự xuống dòng) */
+        width: 100% !important;
+        max-width: 100% !important;
+        position: static !important; /* Gỡ bỏ absolute */
+        height: auto !important;
+        
+        /* Reset sạch sẽ các thuộc tính định vị */
+        top: auto !important; 
+        left: auto !important; 
+        right: auto !important; 
+        transform: none !important;
+        float: none !important;
+    }
+
+    /* 4. Tạo khoảng cách (Thêm margin cho ảnh để đẩy chữ xuống) */
+    .tvc-img-wrapper {
+        margin-bottom: 30px !important;
+    }
     
     /* --- E. CINEMA / VIDEO --- */
     .modern-cinema-section { padding: 40px 15px; }
