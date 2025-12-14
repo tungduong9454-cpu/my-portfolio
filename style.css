@@ -56,7 +56,7 @@
 .hero {
     position: relative;
     width: 100%;
-    height: 100vh; /* Giá trị mặc định ban đầu */
+    height: 100vh;  /* Giá trị mặc định ban đầu */
     overflow: hidden;
     z-index: 999; 
     background-color: white; 
@@ -68,8 +68,33 @@
        - forwards: QUAN TRỌNG - Giữ nguyên trạng thái cuối cùng (không bị bật lại 100vh)
        - 0.5s: (Tuỳ chọn) Thời gian delay trước khi bắt đầu chạy
     */
+    /* animation: shrinkEffect 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.5s;  */
+
+    cursor: pointer; /* Hiện bàn tay khi di chuột vào */
+
+    /* Kích hoạt Animation thu nhỏ lúc mới vào trang */
     animation: shrinkEffect 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 0.5s; 
+    animation-delay: 0.5s;
+
+    /* QUAN TRỌNG: Transition giúp lúc di chuột vào nó to ra mượt mà */
+     
+    transition: all 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+    
+    /* Mẹo nhỏ: Giúp trình duyệt render mượt hơn, đỡ bị giật */
+    will-change: height, border-radius;
+
+}
+
+.hero:hover {
+    /* Khi chuột ở trong banner, ép độ cao về 100vh */
+    height: 90vh !important; 
+    
+    /* Bỏ bo góc */
+    border-bottom-left-radius: 20 !important;
+    border-bottom-right-radius: 20 !important;
+    /* Thêm bóng đổ nhẹ để banner nổi lên trên nền */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
 /* Các phần khác giữ nguyên */
@@ -83,6 +108,11 @@
     z-index: 1;
     /* Thêm transition để video scale mượt theo khung */
     transition: all 1s; 
+    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.hero:hover .hero-video {
+    transform: scale(1.05);
 }
 
 .hero-content {
@@ -695,6 +725,8 @@ html {
 
     .overlay { opacity: 1; transform: translateY(0); } /* Luôn hiện tên */
 }
+
+
 /* ------------------------------------------------------------------ */
 /* --- Style cho Section Video Dọc (Trái) --- */
 .section-vertical-left {
@@ -738,6 +770,8 @@ html {
 .cta-button:hover {
     background-color: #555;
 }
+
+/* ---------------------------------------------------------------------- */
 /* section ảnh dự án */
 /* --- CẤU TRÚC SECTION --- */
 .section-vertical-left {
@@ -754,7 +788,7 @@ html {
     align-items: center; 
     justify-content: center;
     gap: 80px; /* Khoảng cách rộng ra để tạo cảm giác Premium */
-    max-width: 1200px;
+    max-width: 900px;
     width: 100%;
     margin: 0 auto;          /* Lệnh bắt buộc để căn giữa khối container */
 }
@@ -1337,14 +1371,56 @@ html {
 /* --------------------------------------------------------------------------
    1. TABLET & IPAD (Màn hình từ 769px đến 1024px)
    -------------------------------------------------------------------------- */
-@media (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
     
     /* --- Portfolio Intro: Thu nhỏ layout --- */
     .portfolio-container {
-        max-width: 95%; /* Mở rộng ra 2 bên lề */
-        grid-template-columns: 1fr 280px 1fr; /* Thu nhỏ cột ảnh giữa */
+        max-width: 95%; 
+    grid-template-columns: 1fr 280px 1fr; 
+    
+    /* [QUAN TRỌNG] Thêm dòng này: 
+       Nó ép toàn bộ nội dung (bao gồm ảnh) dính chặt xuống cạnh dưới của lưới.
+       Điều này giúp chân của nhân vật trong ảnh bằng với chân của đoạn text bên cạnh. 
+    */
+    align-items: end; 
     }
 
+.portfolio-container .col-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Đẩy nội dung xuống đáy cột */
+    align-items: center;       /* Căn giữa ngang */
+    height: 100%;              /* Chiếm hết chiều cao cột */
+    margin-bottom: 0 !important; /* Xóa margin thừa từ mobile nếu có */
+}
+
+/* 3. QUAN TRỌNG NHẤT: Sửa thẻ bao quanh ảnh */
+.portfolio-container .image-card {
+    width: 100%; /* Đầy khung 280px */
+    
+    /* [MẤU CHỐT] Ghi đè chiều cao 340px của mobile. 
+       Để auto thì ảnh cao bao nhiêu khung cao bấy nhiêu -> Không bao giờ thừa */
+    height: auto !important; 
+    
+    /* Bỏ bo góc dưới nếu muốn nó liền mạch với nền (tuỳ chọn) */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    
+    /* Xử lý flex để ảnh dính đáy */
+    display: flex;
+    align-items: flex-end; 
+    padding: 0;
+    background: transparent; /* Đảm bảo không có màu nền thừa */
+}
+
+/* 4. Sửa ảnh bên trong */
+.portfolio-container .image-card img {
+    width: 100%;
+    height: auto;       /* Tự động tính chiều cao theo tỷ lệ */
+    display: block;     /* Xóa khoảng trắng ma */
+    object-fit: contain;
+    margin-bottom: -10px; /* Mẹo nhỏ: Kéo ảnh xuống 1px để che lấp mọi khe hở */
+}
     /* Giảm cỡ chữ tiêu đề lớn */
     .big-title { font-size: 2rem; }
     .job-heading { font-size: 1.8rem; }
@@ -1372,6 +1448,7 @@ html {
     
     /* Ảnh dự án to ra */
     .portrait-img-project { width: 100%; max-width: 400px; height: auto; display: block;  }
+    
 }
 
 /* --------------------------------------------------------------------------
@@ -1437,9 +1514,18 @@ html {
     }
 
     .image-card {
-        max-width: 250px; /* Thu nhỏ ảnh chút */
+        max-width: 250px;
         height: 340px;
-        animation-delay: 0.2s; /* Hiện nhanh hơn trên mobile */
+        animation-delay: 0.2s;
+        
+        /* [THÊM MỚI] Để xử lý phần thừa bên dưới */
+        display: flex;          /* Biến thẻ này thành khung dẻo */
+        align-items: flex-end;  /* QUAN TRỌNG: Đẩy ảnh dính chặt xuống đáy */
+        justify-content: center;/* Căn giữa ảnh */
+        overflow: hidden;       /* Cắt bỏ mọi thứ thừa ra ngoài khung (nếu có) */
+        
+        /* [TUỲ CHỌN] Nếu bạn muốn card này cũng bo góc giống ảnh */
+        /* Hoặc theo bo góc thiết kế của bạn */
     }
 
     /* 2. Đưa Cột Tên (Trái) xuống thứ 2 */
@@ -1553,3 +1639,5 @@ html {
     
     .contact-list li { align-items: center; } /* Căn giữa thông tin liên hệ */
 }
+
+
