@@ -1474,28 +1474,75 @@ html {
     }
 
 
-    /* --- B. NAVBAR (MENU) - QUAN TRỌNG --- */
-    /* Chuyển Navbar xuống đáy màn hình (Floating Dock) để dễ bấm bằng ngón cái */
+    /* --- B. NAVBAR (MENU MOBILE) --- */
     .navbar {
-        top: auto;          /* Bỏ căn trên */
-        bottom: 20px;       /* Căn dưới */
-        width: 70%;         /* Rộng gần hết màn hình */
-        justify-content: space-between; 
-        padding: 10px 15px;
+        top: auto;          
+        bottom: 25px;       /* Cách đáy một khoảng vừa đủ */
+        left: 50%;
+        transform: translateX(-50%); 
+        
+        width: 85%;         /* Độ rộng vừa phải để đẹp như hình */
+        max-width: 380px;   /* Không cho quá to trên các máy màn hình lớn */
+        height: 65px;       /* Chiều cao cố định để căn giữa icon dễ hơn */
+        
+        padding: 0 10px;    /* Padding nhẹ 2 đầu */
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        border-radius: 50px; /* Hình viên thuốc */
+        background: #ffffff;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
-    
+
+    /* Quan trọng: Sửa lại thẻ nav và ul để chúng chiếm hết chiều rộng */
+    .navbar nav, 
+    .navbar nav ul {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly; /* Chia đều các icon chằn chặn */
+        align-items: center;
+        list-style: none;
+        margin: 0 !important;   /* Xóa mọi margin mặc định */
+        padding: 0 !important;  /* Xóa mọi padding mặc định của UL */
+    }
+
+    .navbar nav ul li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1; /* Mỗi icon chiếm 1 phần bằng nhau */
+    }
+
     .nav-link {
-        padding: 8px 12px; 
-        font-size: 0;       /* MẸO: Ẩn chữ đi, chỉ hiện Icon cho gọn */
+        width: 45px;        /* Tạo vùng bấm hình vuông */
+        height: 45px;
+        padding: 0 !important; /* Xóa padding cũ để căn giữa tuyệt đối */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0;       /* Ẩn chữ */
+        border-radius: 50%; /* Để khi active nó hình tròn */
+        transition: all 0.3s ease;
     }
-    
+
+    /* Style cho icon Active (giống hình bạn gửi - ví dụ icon profile) */
+    .nav-link.active {
+        background-color: #111 !important; /* Nền đen */
+        color: #fff !important;            /* Icon trắng */
+        border-radius: 20px;               /* Bo góc nhẹ hoặc 50% tùy ý */
+        width: 50px;                       /* To hơn một chút cho nổi bật */
+        height: 50px;
+    }
+
     .nav-link svg {
-        width: 24px;        /* Tăng kích thước icon lên */
-        height: 24px;
-        margin: 0;          /* Bỏ margin vì không còn chữ */
+        width: 22px;        /* Kích thước icon chuẩn Mobile */
+        height: 22px;
+        margin: 0 !important; 
     }
-    
-    /* Nếu bạn vẫn muốn hiện chữ thì xóa dòng font-size: 0 ở trên đi */
+
+    .nav-link.active svg {
+        fill: #fff; /* Đảm bảo icon SVG chuyển màu trắng khi nền đen */
+    }
 
 
     /* --- C. PORTFOLIO INTRO (LAYOUT CHÍNH) --- */
